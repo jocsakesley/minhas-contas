@@ -1,0 +1,21 @@
+header {
+  background-color: #1194a8;
+  color: aliceblue;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav ul {
+  text-align: right;
+  list-style: none;
+}
+
+nav ul li {
+  display: inline-block;
+  align-items: center;
+  vertical-align: middle;
+  padding: 0 30px;
+}
+
