@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { BillsService } from "../services/api";
 
 
 
-export const InputContext = React.createContext({});
+export const DataContext = React.createContext({});
 
-export const InputProvider = (props) =>{
-    const [input, setInput] = useState([])
+export const DataProvider = (props) =>{
+    const [data, setData] = useState([])
+    
+    const getBills = async () => {
+        let bills = await BillsService.getBills()
+        bills = await bills.data
+        setData(bills)
+    }
+    const [refreshGetBills] = useState(getBills)
+    useEffect(()=>{
+        getBills()
+    }, [])
+
+
     return (
-        <InputContext.Provider value={{input, setInput}}>
+        <DataContext.Provider value={{data, setData, refreshGetBills}}>
             {props.children}
-        </InputContext.Provider>
+        </DataContext.Provider>
     )
 }
 
-export const OutputContext = React.createContext({});
-
-export const OutputProvider = (props) =>{
-    const [output, setOutput] = useState([])
-    return (
-        <OutputContext.Provider value={{output, setOutput}}>
-            {props.children}
-        </OutputContext.Provider>
-    )
-}

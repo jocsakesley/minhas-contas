@@ -1,27 +1,31 @@
 import './App.css';
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import { Form } from './components/Form';
-import { Header } from './components/Header';
-import { TableAccounts } from './components/TableAccounts'
-import { InputProvider, OutputProvider } from './providers/accounts';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { Home } from './pages/Home';
+import { Login } from './pages/Login';
+import { isAuthenticated } from './services/auth';
 
+
+
+export const PrivateRoute = ({component: Component, ...rest}) => (
+  <Route {...rest} render={props => isAuthenticated() ? (
+        <Component {...props} />
+      
+      ) : (
+        <Redirect to={{pathname: "/", state: {from: props.location}}}
+        />
+      )}
+  />
+)
 
 function App() {
 
   return (
-    <div>
-        <Header />
-          <Container maxWidth='sm'>
-            <InputProvider>
-            <OutputProvider>
-              <Form/>
-              <Divider component="hr" variant="middle" />
-              <TableAccounts />
-              </OutputProvider>
-            </InputProvider>
-          </Container>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path='/' exact component={Login}/>
+        <PrivateRoute path='/home' exact component={Home}/>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

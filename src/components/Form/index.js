@@ -1,42 +1,14 @@
 import TextField from '@material-ui/core/TextField';
 import {ThemeProvider} from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Button, FormControl, FormControlLabel, Select, Switch } from '@material-ui/core';
 import { useState } from 'react';
 import React from 'react';
-import { InputContext, OutputContext } from '../../providers/accounts';
+import { theme } from '../../assets/Theme';
+import { BillsService } from '../../services/api';
+import { useStyles } from './styles';
 
-export const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#1194a8',
-      },
-      secondary: {
-        main: '#11cb5f',
-      },
-    },
-  });
-
-const useStyles = makeStyles(theme => ({
-    textField: {
-        marginTop: theme.spacing(4),
-        width: "100%"
-    },
-    buttonField: {
-        marginTop: theme.spacing(1),
-        width: "100%",
-        height: "50px",
-        backgroundColor: '#1194a8',
-        color: "aliceblue",
-        "&:hover": {
-            backgroundColor: '#0e6e7d'
-        }
-    }
-    
-}));
   
 export const Form = ()=> {
     const classes = useStyles();
@@ -46,19 +18,16 @@ export const Form = ()=> {
     let [value, setValue] = useState('')
     let [date, setDate] = useState('')
     let [recurrent, setRecurrent] = useState(false)
-    const { input, setInput } = React.useContext(InputContext)
-    const { output, setOutput } = React.useContext(OutputContext)
+    // const { data, setData } = React.useContext(DataContext)
     
     return (
         <form onSubmit={(e)=> {
             e.preventDefault()
-            if ( type === "entrada") {
-                setInput([...input,{nameAccount, type, value, date, recurrent}])
-                console.log(input)
-            } else if ( type === "saida") {
-                setOutput([...output,{nameAccount, type, value, date, recurrent}])
-                console.log(output)
-            }
+           
+            // setData([...data,{nameAccount, type, value, date, recurrent}])
+            
+            // console.log(data)
+        
             }
         }>
             <ThemeProvider theme={theme}>
@@ -80,8 +49,8 @@ export const Form = ()=> {
                         value={type}
                         onChange={(e) => setType(e.target.value)}
                         >
-                            <MenuItem value={"entrada"}>Entrada</MenuItem>
-                            <MenuItem value={"saida"}>Saída</MenuItem>
+                            <MenuItem value={"E"}>Entrada</MenuItem>
+                            <MenuItem value={"S"}>Saída</MenuItem>
                         </Select>
                     </FormControl>
                     <TextField 
@@ -115,7 +84,7 @@ export const Form = ()=> {
                                 label="Tornar recorrente"
                             />
                     </FormControl>
-                    <Button type="submit" className={classes.buttonField}>Cadastrar</Button>
+                    <Button type="submit" onClick={async () => await BillsService.postBills({"name":nameAccount, "type_bill":type, "value": parseFloat(value), "date": date, "is_recurrent":recurrent})} className={classes.buttonField}>Cadastrar</Button>
         
             </ThemeProvider>
         </form>
