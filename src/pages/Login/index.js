@@ -1,9 +1,10 @@
 import { Button, Card, Container, TextField, ThemeProvider, Typography } from "@material-ui/core"
 import { useState } from "react"
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { theme } from "../../assets/Theme"
 import { Header } from "../../components/Header"
 import { AuthService } from "../../services/auth"
+import { useStyles } from "./styles"
 
 
 export const Login = () => {
@@ -11,6 +12,7 @@ export const Login = () => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState(false)
     const history = useHistory()
+    const classes = useStyles()
     return(
         <>
         <Header/>
@@ -60,8 +62,10 @@ export const Login = () => {
                         onClick={async() => {
                             try {
                                 let login = await AuthService.getToken(email, password)
-                                localStorage.setItem('token', login.data.access )
-                                localStorage.setItem('refresh', login.data.refresh )
+                                await localStorage.setItem('token', login.data.access )
+                                await localStorage.setItem('refresh', login.data.refresh )
+                                let user = await AuthService.tokenIsValid(localStorage.getItem('token'))
+                                await localStorage.setItem('user', user.data.email )
                                 history.push('/home')
                                 setError(false)
                             } catch(err) {
@@ -75,6 +79,10 @@ export const Login = () => {
                     >
                         Entrar
                     </Button>
+                    <div className={classes.links}>
+                        <Link to="/register">Registrar-se</Link>
+                        <Link to="/">Esqueci a senha</Link>
+                    </div>
                     </ThemeProvider>
                 </form>
             </Card>

@@ -18,16 +18,10 @@ export const Form = ()=> {
     let [value, setValue] = useState('')
     let [date, setDate] = useState('')
     let [recurrent, setRecurrent] = useState(false)
-    // const { data, setData } = React.useContext(DataContext)
     
     return (
         <form onSubmit={(e)=> {
-            e.preventDefault()
-           
-            // setData([...data,{nameAccount, type, value, date, recurrent}])
-            
-            // console.log(data)
-        
+            e.preventDefault()     
             }
         }>
             <ThemeProvider theme={theme}>

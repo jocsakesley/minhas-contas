@@ -1,7 +1,10 @@
 import axios from 'axios'
 
+// const BASE_URL = "http://127.0.0.1:8000/"
+const BASE_URL = "https://appminhascontas.herokuapp.com/"
 
 const api = axios.create({
+    // baseURL: "http://127.0.0.1:8000/"
     baseURL: "https://appminhascontas.herokuapp.com/"
 });
 
@@ -27,5 +30,11 @@ export class BillsService{
     }
     static postBills(data) {
         return api.post('bills/', data)
+    }
+}
+
+export class UserService {
+    static postUser(data) {
+        return api.post(`${BASE_URL}users/`, data)
     }
 }

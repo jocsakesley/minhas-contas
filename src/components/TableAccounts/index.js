@@ -6,7 +6,7 @@ import { BillsService } from "../../services/api";
 
 
 export const TableAccounts = () => {
-    const { data, refreshGetBills } = React.useContext(DataContext)
+    const { data } = React.useContext(DataContext)
     const classes = useStyles()
     let input = data.filter((d) => d.type_bill === "E")
     let output = data.filter((d) => d.type_bill === "S")
@@ -32,7 +32,6 @@ export const TableAccounts = () => {
                          <TableCell style={{color:"#1194a8"}}>R$ {i.value}
                          <button onClick={async () => {
                              await BillsService.deleteBill(i.id)
-                             await refreshGetBills()
                              }
                              } style={{backgroundColor: "#F0584A", color: "white", float: "right"}}>
                                  x

@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { isAuthenticated } from './services/auth';
+import { UserRegister } from './pages/UserRegister';
 
 
 
@@ -23,6 +24,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact component={Login}/>
+        <Route path='/register' exact component={UserRegister}/>
         <PrivateRoute path='/home' exact component={Home}/>
       </Switch>
     </BrowserRouter>

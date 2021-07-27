@@ -4,7 +4,6 @@ import './Header.css';
 
 export const Header = (props) => {
 
-    const options = ['Home', 'Categorias' ]
     return (
         <header>
       
@@ -12,13 +11,11 @@ export const Header = (props) => {
                 Minhas Contas
                 
             </div>
-            <nav>
-                <ul>
-                    {options.map(option => <li key={option}>{option}</li>)}
-                    
-                </ul>
-            </nav>
-            <Link to='/' onClick={props.logout}>Logout</Link>
+            <div>
+                {props.user}    
+            </div>
+            
+            <Link to='/' onClick={props.logout} style={{textDecoration:"none", color: "aliceblue"}}>{props.label}</Link>
             
       
         </header>
