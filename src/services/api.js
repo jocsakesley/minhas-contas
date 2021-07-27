@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-// const BASE_URL = "http://127.0.0.1:8000/"
-const BASE_URL = "https://appminhascontas.herokuapp.com/"
+const BASE_URL = "http://127.0.0.1:8000/"
+// const BASE_URL = "https://appminhascontas.herokuapp.com/"
 
 const api = axios.create({
-    // baseURL: "http://127.0.0.1:8000/"
-    baseURL: "https://appminhascontas.herokuapp.com/"
+    baseURL: "http://127.0.0.1:8000/"
+    // baseURL: "https://appminhascontas.herokuapp.com/"
 });
 
 api.interceptors.request.use(async config => {

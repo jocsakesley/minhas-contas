@@ -8,6 +8,7 @@ import React from 'react';
 import { theme } from '../../assets/Theme';
 import { BillsService } from '../../services/api';
 import { useStyles } from './styles';
+import { DataContext } from '../../providers/accounts';
 
   
 export const Form = ()=> {
@@ -18,7 +19,7 @@ export const Form = ()=> {
     let [value, setValue] = useState('')
     let [date, setDate] = useState('')
     let [recurrent, setRecurrent] = useState(false)
-    
+    const { updateData, setUpdateData} = React.useContext(DataContext)
     return (
         <form onSubmit={(e)=> {
             e.preventDefault()     
@@ -78,7 +79,10 @@ export const Form = ()=> {
                                 label="Tornar recorrente"
                             />
                     </FormControl>
-                    <Button type="submit" onClick={async () => await BillsService.postBills({"name":nameAccount, "type_bill":type, "value": parseFloat(value), "date": date, "is_recurrent":recurrent})} className={classes.buttonField}>Cadastrar</Button>
+                    <Button type="submit" onClick={async () => {
+                        await BillsService.postBills({"name":nameAccount, "type_bill":type, "value": parseFloat(value), "date": date, "is_recurrent":recurrent})
+                        setUpdateData(!updateData)
+                    }} className={classes.buttonField}>Cadastrar</Button>
         
             </ThemeProvider>
         </form>
