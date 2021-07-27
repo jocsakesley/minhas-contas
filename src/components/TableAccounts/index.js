@@ -65,7 +65,14 @@ export const TableAccounts = () => {
                      
                          <TableCell style={{color:"#F0584A"}}>{o.name}</TableCell>
                          <TableCell style={{color:"#F0584A"}}>{o.date.split('-')[2] + '/' + o.date.split('-')[1] + '/' + o.date.split('-')[0]}</TableCell>
-                         <TableCell style={{color:"#F0584A"}}>R$ {o.value}</TableCell>
+                         <TableCell style={{color:"#F0584A"}}>R$ {o.value}
+                         <button onClick={async () => {
+                             await BillsService.deleteBill(o.id)
+                             }
+                             } style={{backgroundColor: "#F0584A", color: "white", float: "right"}}>
+                                 x
+                        </button>
+                         </TableCell>
                     
                      </TableRow>
                  )})}
