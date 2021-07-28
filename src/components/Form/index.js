@@ -19,7 +19,10 @@ export const Form = ()=> {
     let [value, setValue] = useState('')
     let [date, setDate] = useState('')
     let [recurrent, setRecurrent] = useState(false)
+    const [valueMasked, setValueMasked] = useState('')
     const { updateData, setUpdateData} = React.useContext(DataContext)
+
+  
     return (
         <form onSubmit={(e)=> {
             e.preventDefault()     
@@ -49,16 +52,27 @@ export const Form = ()=> {
                         </Select>
                     </FormControl>
                     <TextField 
-                    type="number"
-                    step="0.01"
-                    min="0.01"
-                    id="outlined-basic" 
+                    type="text"
+                    id="value" 
                     label="Valor" 
                     variant="outlined"
                     className={classes.textField}
-                    value={value}
+                    value={valueMasked}
                     onChange={(e)=> {
-                        setValue(e.target.value)
+                        var valor = e.target.value;
+                        valor = valor + '';
+                        valor = parseInt(valor.replace(/[\D]+/g, ''));
+                        valor = valor + '';
+                        valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+                        if (valor.length > 6) {
+                            valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+                        }
+
+                        setValueMasked(valor);
+                        if(valor === 'NaN') setValueMasked('');
+        
+                        setValue(parseFloat(valor.replace('.', '').replace(',', '.')))
                     }}
                     />
                     <TextField
