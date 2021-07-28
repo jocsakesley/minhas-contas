@@ -79,9 +79,9 @@ export const Login = () => {
                     >
                         Entrar
                     </Button>
-                    <div className={classes.links}>
-                        <Link to="/register">Registrar-se</Link>
-                        <Link to="/">Esqueci a senha</Link>
+                    <div className={classes.linksContainer}>
+                        <Link className={classes.link} to="/register">Registrar-se ></Link>
+                        <Link className={classes.link} to="/">Esqueci a senha ></Link>
                     </div>
                     </ThemeProvider>
                 </form>
