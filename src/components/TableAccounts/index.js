@@ -1,5 +1,5 @@
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core"
-import React, { useState } from "react";
+import React from "react";
 import { DataContext } from "../../providers/accounts"
 import { useStyles } from "./styles";
 import { BillsService } from "../../services/api";
