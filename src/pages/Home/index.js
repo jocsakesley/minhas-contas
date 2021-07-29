@@ -25,7 +25,7 @@ export const Home = () => {
             localStorage.setItem('token', refreshedToken.data.access)
         }
 
-    },1620000000)
+    },300000)
     return (
         <>
             <Header logout={logout} label="Sair" user={user}/>
