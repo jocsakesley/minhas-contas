@@ -12,15 +12,23 @@ export const Home = () => {
         localStorage.removeItem('token')
     }
     
-    let user = async() => {
-         user  = await AuthService.tokenIsValid(localStorage.getItem('token'))
-         user = await user.data.email
-         console.log(user)
-         return user
-    }
+    const user = localStorage.getItem('user')
+
+    setInterval(async() => {
+        
+        try {
+            let is_valid = await AuthService.tokenIsValid(localStorage.getItem('token'))
+            console.log(is_valid.data)
+        } catch {
+            localStorage.removeItem('token')
+            let refreshedToken = await AuthService.getRefresh(localStorage.getItem('refresh'))
+            localStorage.setItem('token', refreshedToken.data.access)
+        }
+
+    },1620000000)
     return (
         <>
-            <Header logout={logout} label="Logout" user={() => user()}/>
+            <Header logout={logout} label="Sair" user={user}/>
             <Container maxWidth='sm'>
             <DataProvider>
                 <Form/>

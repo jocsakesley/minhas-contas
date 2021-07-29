@@ -11,6 +11,10 @@ export class AuthService extends Component{
         return axios.post(`${BASE_URL}api/token/`, {"email":email, "password": password})
     }
 
+    static getRefresh(refresh) {
+        return axios.post(`${BASE_URL}api/token/refresh/`, {"refresh":refresh})
+    }
+
     static tokenIsValid(token) {
         return axios.post(`${BASE_URL}api/token_is_valid/`, {"access": token})
     }

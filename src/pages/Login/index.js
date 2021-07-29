@@ -62,10 +62,10 @@ export const Login = () => {
                         onClick={async() => {
                             try {
                                 let login = await AuthService.getToken(email, password)
-                                await localStorage.setItem('token', login.data.access )
-                                await localStorage.setItem('refresh', login.data.refresh )
+                                localStorage.setItem('token', login.data.access )
+                                localStorage.setItem('refresh', login.data.refresh )
                                 let user = await AuthService.tokenIsValid(localStorage.getItem('token'))
-                                await localStorage.setItem('user', user.data.email )
+                                localStorage.setItem('user', user.data.email )
                                 history.push('/home')
                                 setError(false)
                             } catch(err) {
@@ -80,8 +80,8 @@ export const Login = () => {
                         Entrar
                     </Button>
                     <div className={classes.linksContainer}>
-                        <Link className={classes.link} to="/register">Registrar-se ></Link>
-                        <Link className={classes.link} to="/">Esqueci a senha ></Link>
+                        <Link className={classes.link} to="/register">Registrar-se</Link>
+                        <Link className={classes.link} to="/">Esqueci a senha</Link>
                     </div>
                     </ThemeProvider>
                 </form>

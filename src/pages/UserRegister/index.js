@@ -7,7 +7,7 @@ export const UserRegister = () => {
     return (
         <>
         <Header/>
-       <Container maxWidth="sm">
+        <Container maxWidth="sm">
         
         <FormUser/>
        </Container>

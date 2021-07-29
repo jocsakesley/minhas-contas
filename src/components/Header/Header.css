@@ -19,3 +19,21 @@ nav ul li {
   padding: 0 30px;
 }
 
+.menu{
+  display: flex;
+  justify-content: space-between;
+}
+
+.user {
+  display: block;
+  float: left;
+  margin: 5%;
+
+}
+.exit {
+  text-decoration:none;
+  color: aliceblue;
+  display: block;
+  float: left;
+  margin: 5%;
+}

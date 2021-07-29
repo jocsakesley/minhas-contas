@@ -3,7 +3,8 @@ import './Header.css';
 
 
 export const Header = (props) => {
-
+    
+        
     return (
         <header>
       
@@ -11,12 +12,13 @@ export const Header = (props) => {
                 Minhas Contas
                 
             </div>
-            <div>
-                {props.user}    
+            <div className="menu">
+                <span className="user">
+                    {props.user}
+                </span>
+                
+                <Link to='/' onClick={props.logout} className="exit">{props.label}</Link>
             </div>
-            
-            <Link to='/' onClick={props.logout} style={{textDecoration:"none", color: "aliceblue"}}>{props.label}</Link>
-            
       
         </header>
     )
